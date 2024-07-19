@@ -1,0 +1,48 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'com.chippo'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation 'jakarta.validation:jakarta.validation-api:3.0.2' // 최신 버전으로 설정
+	implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final' // 최신 버전으로 설정
+
+	// 추가적으로, javax.activation 모듈도 필요할 수 있습니다.
+	implementation 'org.glassfish:jakarta.el:4.0.2'
+	// spring aop 라이브러리 사용
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
